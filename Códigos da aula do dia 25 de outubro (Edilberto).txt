@@ -1,37 +1,61 @@
 # TabFatoBilheteria
 
-= CREATE TABLE dbo.Fato(
-Table.RemoveColumns(#"Alterar Tipo",{"CPB_ROE", "REGISTRO_DISTRIBUIDORA", "CNPJ_DISTRIBUIDORA", "TITULO_ORIGINAL"})
+let
+    Fonte = Csv.Document(File.Contents("D:\João Guilherme\BilheteriaObrasSemana (2).csv"),[Delimiter=";", Columns=15, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+    #"Usar a Primeira Linha como Cabeçalho" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+    #"Alterar Tipo" = Table.TransformColumnTypes(#"Usar a Primeira Linha como Cabeçalho",{{"TITULO_ORIGINAL", type text}, {"TITULO_BRASILEIRO", type text}, {"GENERO", type text}, {"PAIS_ORIGEM", type text}, {"CPB_ROE", type text}, {"COPIAS", Int64.Type}, {"SALAS", Int64.Type}, {"DT_INICIO_EXIBICAO", type date}, {"DT_FIM_EXIBICAO", type date}, {"PUBLICO", Int64.Type}, {"RENDA", type number}, {"RAZAO_SOCIAL_DISTRIBUIDORA", type text}, {"REGISTRO_DISTRIBUIDORA", Int64.Type}, {"CNPJ_DISTRIBUIDORA", type text}, {"ANO_CINEMATOGRAFICO", Int64.Type}}),
+    #"Colunas Removidas" = Table.RemoveColumns(#"Alterar Tipo",{"CPB_ROE", "REGISTRO_DISTRIBUIDORA", "CNPJ_DISTRIBUIDORA", "TITULO_ORIGINAL"})
+in
+    #"Colunas Removidas"
 
 # DIM_Genero
 
-= CREATE TABLE dbo.DIM_Genero(
-Table.RemoveColumns(#"Alterar Tipo",{"CPB_ROE", "REGISTRO_DISTRIBUIDORA", "CNPJ_DISTRIBUIDORA", "TITULO_ORIGINAL", "TITULO_BRASILEIRO", "PAIS_ORIGEM", "COPIAS", "SALAS", "DT_INICIO_EXIBICAO", "DT_FIM_EXIBICAO", "PUBLICO", "RENDA", "RAZAO_SOCIAL_DISTRIBUIDORA", "ANO_CINEMATOGRAFICO"}))
+let
+    Fonte = Csv.Document(File.Contents("D:\João Guilherme\BilheteriaObrasSemana (2).csv"),[Delimiter=";", Columns=15, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+    #"Usar a Primeira Linha como Cabeçalho" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+    #"Alterar Tipo" = Table.TransformColumnTypes(#"Usar a Primeira Linha como Cabeçalho",{{"TITULO_ORIGINAL", type text}, {"TITULO_BRASILEIRO", type text}, {"GENERO", type text}, {"PAIS_ORIGEM", type text}, {"CPB_ROE", type text}, {"COPIAS", Int64.Type}, {"SALAS", Int64.Type}, {"DT_INICIO_EXIBICAO", type date}, {"DT_FIM_EXIBICAO", type date}, {"PUBLICO", Int64.Type}, {"RENDA", type number}, {"RAZAO_SOCIAL_DISTRIBUIDORA", type text}, {"REGISTRO_DISTRIBUIDORA", Int64.Type}, {"CNPJ_DISTRIBUIDORA", type text}, {"ANO_CINEMATOGRAFICO", Int64.Type}}),
+    #"Colunas Removidas" = Table.RemoveColumns(#"Alterar Tipo",{"CPB_ROE", "REGISTRO_DISTRIBUIDORA", "CNPJ_DISTRIBUIDORA", "TITULO_ORIGINAL", "TITULO_BRASILEIRO", "PAIS_ORIGEM", "COPIAS", "SALAS", "DT_INICIO_EXIBICAO", "DT_FIM_EXIBICAO", "PUBLICO", "RENDA", "RAZAO_SOCIAL_DISTRIBUIDORA", "ANO_CINEMATOGRAFICO"})
+in
+    #"Colunas Removidas"
 
 # DIM_País
 
-= CREATE TABLE dbo.DIM_Pais(
-Table.RemoveColumns(#"Alterar Tipo",{"CPB_ROE", "REGISTRO_DISTRIBUIDORA", "CNPJ_DISTRIBUIDORA", "TITULO_ORIGINAL", "TITULO_BRASILEIRO", "GENERO", "COPIAS", "SALAS", "DT_INICIO_EXIBICAO", "DT_FIM_EXIBICAO", "PUBLICO", "RENDA", "RAZAO_SOCIAL_DISTRIBUIDORA", "ANO_CINEMATOGRAFICO"}))
+let
+    Fonte = Csv.Document(File.Contents("D:\João Guilherme\BilheteriaObrasSemana (2).csv"),[Delimiter=";", Columns=15, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+    #"Usar a Primeira Linha como Cabeçalho" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+    #"Alterar Tipo" = Table.TransformColumnTypes(#"Usar a Primeira Linha como Cabeçalho",{{"TITULO_ORIGINAL", type text}, {"TITULO_BRASILEIRO", type text}, {"GENERO", type text}, {"PAIS_ORIGEM", type text}, {"CPB_ROE", type text}, {"COPIAS", Int64.Type}, {"SALAS", Int64.Type}, {"DT_INICIO_EXIBICAO", type date}, {"DT_FIM_EXIBICAO", type date}, {"PUBLICO", Int64.Type}, {"RENDA", type number}, {"RAZAO_SOCIAL_DISTRIBUIDORA", type text}, {"REGISTRO_DISTRIBUIDORA", Int64.Type}, {"CNPJ_DISTRIBUIDORA", type text}, {"ANO_CINEMATOGRAFICO", Int64.Type}}),
+    #"Colunas Removidas" = Table.RemoveColumns(#"Alterar Tipo",{"CPB_ROE", "REGISTRO_DISTRIBUIDORA", "CNPJ_DISTRIBUIDORA", "TITULO_ORIGINAL", "TITULO_BRASILEIRO", "GENERO", "COPIAS", "SALAS", "DT_INICIO_EXIBICAO", "DT_FIM_EXIBICAO", "PUBLICO", "RENDA", "RAZAO_SOCIAL_DISTRIBUIDORA", "ANO_CINEMATOGRAFICO"})
+in
+    #"Colunas Removidas"
 
 # DIM_Distribuidora
 
-= CREATE TABLE dbo.DIM_Distribuidora(
-Table.RemoveColumns(#"Alterar Tipo",{"CPB_ROE", "REGISTRO_DISTRIBUIDORA", "CNPJ_DISTRIBUIDORA", "TITULO_ORIGINAL", "TITULO_BRASILEIRO", "GENERO", "PAIS_ORIGEM", "COPIAS", "SALAS", "DT_INICIO_EXIBICAO", "DT_FIM_EXIBICAO", "PUBLICO", "RENDA", "ANO_CINEMATOGRAFICO"}))
+let
+    Fonte = Csv.Document(File.Contents("D:\João Guilherme\BilheteriaObrasSemana (2).csv"),[Delimiter=";", Columns=15, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+    #"Usar a Primeira Linha como Cabeçalho" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+    #"Alterar Tipo" = Table.TransformColumnTypes(#"Usar a Primeira Linha como Cabeçalho",{{"TITULO_ORIGINAL", type text}, {"TITULO_BRASILEIRO", type text}, {"GENERO", type text}, {"PAIS_ORIGEM", type text}, {"CPB_ROE", type text}, {"COPIAS", Int64.Type}, {"SALAS", Int64.Type}, {"DT_INICIO_EXIBICAO", type date}, {"DT_FIM_EXIBICAO", type date}, {"PUBLICO", Int64.Type}, {"RENDA", type number}, {"RAZAO_SOCIAL_DISTRIBUIDORA", type text}, {"REGISTRO_DISTRIBUIDORA", Int64.Type}, {"CNPJ_DISTRIBUIDORA", type text}, {"ANO_CINEMATOGRAFICO", Int64.Type}}),
+    #"Colunas Removidas" = Table.RemoveColumns(#"Alterar Tipo",{"CPB_ROE", "REGISTRO_DISTRIBUIDORA", "CNPJ_DISTRIBUIDORA", "TITULO_ORIGINAL", "TITULO_BRASILEIRO", "GENERO", "PAIS_ORIGEM", "COPIAS", "SALAS", "DT_INICIO_EXIBICAO", "DT_FIM_EXIBICAO", "PUBLICO", "RENDA", "ANO_CINEMATOGRAFICO"})
+in
+    #"Colunas Removidas"
 
 # DIM_Tempo
 
-= CREATE TABLE dbo.DIM_Tempo(
-Table.RemoveColumns(#"Alterar Tipo",{"CPB_ROE", "REGISTRO_DISTRIBUIDORA", "CNPJ_DISTRIBUIDORA", "TITULO_ORIGINAL", "TITULO_BRASILEIRO", "GENERO", "PAIS_ORIGEM", "COPIAS", "SALAS", "PUBLICO", "RENDA", "RAZAO_SOCIAL_DISTRIBUIDORA"})
-ID_DIM_TEMPO int IDENTITY NOT NULL PRIMARY KEY,
+let
+    Fonte = Csv.Document(File.Contents("D:\João Guilherme\BilheteriaObrasSemana (2).csv"),[Delimiter=";", Columns=15, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+    #"Usar a Primeira Linha como Cabeçalho" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+    #"Alterar Tipo" = Table.TransformColumnTypes(#"Usar a Primeira Linha como Cabeçalho",{{"TITULO_ORIGINAL", type text}, {"TITULO_BRASILEIRO", type text}, {"GENERO", type text}, {"PAIS_ORIGEM", type text}, {"CPB_ROE", type text}, {"COPIAS", Int64.Type}, {"SALAS", Int64.Type}, {"DT_INICIO_EXIBICAO", type date}, {"DT_FIM_EXIBICAO", type date}, {"PUBLICO", Int64.Type}, {"RENDA", type number}, {"RAZAO_SOCIAL_DISTRIBUIDORA", type text}, {"REGISTRO_DISTRIBUIDORA", Int64.Type}, {"CNPJ_DISTRIBUIDORA", type text}, {"ANO_CINEMATOGRAFICO", Int64.Type}}),
+    #"Colunas Removidas" = Table.RemoveColumns(#"Alterar Tipo",{"CPB_ROE", "REGISTRO_DISTRIBUIDORA", "CNPJ_DISTRIBUIDORA", "TITULO_ORIGINAL", "TITULO_BRASILEIRO", "GENERO", "PAIS_ORIGEM", "COPIAS", "SALAS", "PUBLICO", "RENDA", "RAZAO_SOCIAL_DISTRIBUIDORA"})
+in
+    #"Colunas Removidas"
+
+    ID_DIM_TEMPO int IDENTITY NOT NULL PRIMARY KEY,
 	DATA date NOT NULL,
 	ANO smallint NOT NULL,
 	MES smallint NOT NULL,
 	DIA smallint NOT NULL,
-	BIMESTRE smallint NOT NULL,
-	TRIMESTRE smallint NOT NULL,
-	SEMESTRE smallint NOT NULL,
-
-declare @dataInicial date, @dataFinal date, @data date, @ano smallint, @mes smallint, @dia smallint, @bimestre smallint, @trimestre smallint,)
+	
+declare 
+    @dataInicial date, @dataFinal date, @data date, @ano smallint, @mes smallint, @dia smallint, @bimestre smallint, @trimestre smallint,)
 
 
 
