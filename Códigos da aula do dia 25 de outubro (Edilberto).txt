@@ -1,3 +1,6 @@
+CREATE DATABASE mmd_cinema;
+USE mmd_cinema;
+
 ## Dimensão Distribuidora (dim_distribuidora) ##
 
 DROP TABLE IF EXISTS `mmd_cinema`.`dim_distribuidora` ;
