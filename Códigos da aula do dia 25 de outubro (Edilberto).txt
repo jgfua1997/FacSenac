@@ -674,10 +674,11 @@ CREATE TABLE IF NOT EXISTS `mmd_cinema`.`FATO_Distribuidora` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-----------------------------------------------------------------------------------------------------
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+FATO_Cond_ECONOMICA (com Descrição):
+INSERT INTO `FATO_Distribuidora`(`dim_pais`, `dim_genero`, `dim_distribuidora`, `dim_tempo`) 
+SELECT dim_pais, dim_genero, dim_distribuidora, dim_tempo FROM FATO_Distribuidora INNER JOIN dim_pais on idPais = dim_pais INNER JOIN dim_genero on idGenero = dim_genero INNER JOIN dim_distribuidora ON idDistribuidora = dim_distribuidora INNER JOIN dim_tempo on idTempo = dim_tempo;
 
 
 
