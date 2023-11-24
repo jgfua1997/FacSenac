@@ -628,7 +628,17 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 use mmd_cinema;
 
-INSERT INTO dim_tempo (idTempo, Data_inicio_exibicao, Ano, Mes, Dia, Bimestre, Trimestre, Semestre) VALUES
+INSERT INTO dim_tempo (idTempo, data_inicio_exibicao, data_fim_exibicao, ano, mes, dia, trimestre, semestre) VALUES
+
+    d.data,
+    Ano AS ano,
+    Mês AS mes,
+    Dia AS dia,
+    Bimestre AS bimestre
+    Trimestre AS trimestre,
+    QUARTER AS semestre,
+
+    SELECT * FROM dim_tempo
 
 
 ########################################################################################################################################
